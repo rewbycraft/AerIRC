@@ -1,0 +1,81 @@
+NICK Test
+USER Test * * :Test
+JOIN #rewbycraft
+:galaxy.roelf.org NOTICE Auth :*** Looking up your hostname...
+:galaxy.roelf.org NOTICE Auth :*** Could not resolve your hostname: Domain name not found; using your IP address (2001:0:53aa:64c:38a4:2c1f:2add:c7a5) instead.
+PING :b\IMxptrGU
+:galaxy.roelf.org NOTICE Test :*** If you are having problems connecting due to ping timeouts, please type /quote PONG b\IMxptrGU or /raw PONG b\IMxptrGU now.
+:galaxy.roelf.org 451 JOIN :You have not registered
+PONG :b\IMxptrGU
+:galaxy.roelf.org NOTICE Auth :Welcome to SpectreNet!
+:galaxy.roelf.org 001 Test :Welcome to the SpectreNet IRC Network Test!Test@2001:0:53aa:64c:38a4:2c1f:2add:c7a5
+:galaxy.roelf.org 002 Test :Your host is galaxy.roelf.org, running version InspIRCd-2.0
+:galaxy.roelf.org 003 Test :This server was created 15:17:06 Sep 20 2014
+:galaxy.roelf.org 004 Test galaxy.roelf.org InspIRCd-2.0 BHIRSWcghiorswx ABCDFHIJKLMNOPQRSTXYZbcdefghijklmnoprstuvwz FHIJLXYZbdefghjklovw
+:galaxy.roelf.org 005 Test AWAYLEN=200 CALLERID=g CASEMAPPING=rfc1459 CHANMODES=IXZbegw,k,FHJLdfjl,ABCDKMNOPQRSTcimnprstuz CHANNELLEN=32 CHANTYPES=# CHARSET=ascii ELIST=MU EXCEPTS=e EXTBAN=,ABCNOQRSTUcmprsz FNC INVEX=I KICKLEN=255 :are supported by this server
+:galaxy.roelf.org 005 Test MAP MAXBANS=60 MAXCHANNELS=20 MAXPARA=32 MAXTARGETS=20 MODES=10 NAMESX NETWORK=SpectreNet NICKLEN=25 OPERLOG OVERRIDE PREFIX=(Yohv)!@%+ REMOVE :are supported by this server
+:galaxy.roelf.org 005 Test SECURELIST SSL=[::]:6697 STARTTLS STATUSMSG=!@%+ TOPICLEN=255 USERIP VBANLIST WALLCHOPS WALLVOICES WATCH=32 :are supported by this server
+:galaxy.roelf.org 042 Test 1GAAAAABJ :your unique ID
+:galaxy.roelf.org 375 Test :galaxy.roelf.org message of the day
+:galaxy.roelf.org 372 Test :-     ░█▀▀░█▀█░█░░░█▀█░█░█░█░█░░░░█▀▄░█▀█░█▀▀░█░░░█▀▀░░░░█▀█░█▀▄░█▀▀
+:galaxy.roelf.org 372 Test :-     ░█░█░█▀█░█░░░█▀█░▄▀▄░░█░░░░░█▀▄░█░█░█▀▀░█░░░█▀▀░░░░█░█░█▀▄░█░█
+:galaxy.roelf.org 372 Test :-     ░▀▀▀░▀░▀░▀▀▀░▀░▀░▀░▀░░▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀░░░▀░░▀▀▀░▀░▀░▀▀▀
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-                          Guarded by its opers.
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-     +      o     +              o   
+:galaxy.roelf.org 372 Test :-         +             o     +       +
+:galaxy.roelf.org 372 Test :-     o          +
+:galaxy.roelf.org 372 Test :-         o  +           +        +
+:galaxy.roelf.org 372 Test :-     +        o     o       +        o
+:galaxy.roelf.org 372 Test :-     -_-_-_-_-_-_-_,------,      o 
+:galaxy.roelf.org 372 Test :-     _-_-_-_-_-_-_-|   /\_/\  
+:galaxy.roelf.org 372 Test :-     -_-_-_-_-_-_-~|__( ^ .^)  +     +  
+:galaxy.roelf.org 372 Test :-     _-_-_-_-_-_-_-""  ""      
+:galaxy.roelf.org 372 Test :-     +      o         o   +       o
+:galaxy.roelf.org 372 Test :-         +         +
+:galaxy.roelf.org 372 Test :-     o        o         o      o     +
+:galaxy.roelf.org 372 Test :-         o           +
+:galaxy.roelf.org 372 Test :-     +      +     o        o      +    
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-     Administrators: rewbycraft <rewbycraft@spectrenet.cf>
+:galaxy.roelf.org 372 Test :-     Operators:      (none)
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-     Ports: 6667
+:galaxy.roelf.org 372 Test :-       SSL: 6697
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-     Channels:
+:galaxy.roelf.org 372 Test :-       #help     - General irc help.
+:galaxy.roelf.org 372 Test :-       #lobby    - General chatting.
+:galaxy.roelf.org 372 Test :-       #operhelp - Network staff assistance.
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-     Rules:
+:galaxy.roelf.org 372 Test :-       1.) Do not flood.
+:galaxy.roelf.org 372 Test :-       2.) Do not share malicious files.
+:galaxy.roelf.org 372 Test :-       3.) Do not mass-advertise or mass-share links.
+:galaxy.roelf.org 372 Test :-       4.) Have fun!
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-     Disclaimer:               
+:galaxy.roelf.org 372 Test :-       The Network staff may restrict access to the network
+:galaxy.roelf.org 372 Test :-       for whatever reason they see fit; if you think you were
+:galaxy.roelf.org 372 Test :-       banned incorrectly, or for an invalid reason, visit
+:galaxy.roelf.org 372 Test :-       http://www.spectrenet.cf/
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-       The SpectreNet IRC network adheres the European laws and
+:galaxy.roelf.org 372 Test :-       users should follow them at all time.
+:galaxy.roelf.org 372 Test :-  
+:galaxy.roelf.org 372 Test :-       SpectreNet does not take any liability for the actions
+:galaxy.roelf.org 372 Test :-       its users take and will not be held responsible.
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 372 Test :-       SpectreNet is a privilege, not a right.
+:galaxy.roelf.org 372 Test :- 
+:galaxy.roelf.org 376 Test :End of message of the day.
+:galaxy.roelf.org 251 Test :There are 5 users and 17 invisible on 6 servers
+:galaxy.roelf.org 252 Test 18 :operator(s) online
+:galaxy.roelf.org 254 Test 10 :channels formed
+:galaxy.roelf.org 255 Test :I have 3 clients and 1 servers
+:galaxy.roelf.org 265 Test :Current Local Users: 3  Max: 3
+:galaxy.roelf.org 266 Test :Current Global Users: 22  Max: 22
+:NickServ!NickServ@services.spectrenet.cf NOTICE Test :Welcome to SpectreNet, Test! Here on SpectreNet, we provide services to enable the registration of nicknames and channels! For details, type /msg NickServ help and /msg ChanServ help.
+:StatServ!StatServ@services.spectrenet.cf PRIVMSG Test :VERSION
