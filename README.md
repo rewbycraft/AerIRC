@@ -1,7 +1,5 @@
 # AerIRC - Project Aeris IRC Library
 
-Hi!
-
 ## What is this?
 
 This is the repository for AerIRC.
