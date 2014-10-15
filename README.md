@@ -1,5 +1,7 @@
 # AerIRC - Project Aeris IRC Library
 
+[![Build Status](https://travis-ci.org/rewbycraft/AerIRC.svg?branch=master)](https://travis-ci.org/rewbycraft/AerIRC)
+
 ## What is this?
 
 This is the repository for AerIRC.
