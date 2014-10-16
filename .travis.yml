@@ -6,7 +6,7 @@ scala:
    - 2.11.3
 
 notifications:
-  irc
+  irc:
     - "irc.esper.net#rewbycraft"
     - "irc.spectrenet.cf#rewbycraft"
     - "irc.spectrenet.cf#Aeristalk"
