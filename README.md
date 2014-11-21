@@ -29,6 +29,10 @@ This code is under MIT license. See LICENSE.
 
 I hope to get a maven repo up for this soon-ish. No promises.
 
+## Unsupported stuff:
+
+IRC numberics: 004, 005, 265, 266 as they are not important at all.
+
 ## Special thanks
 
 * *[Zarthus](http://zarth.us/)* for helping me out and fielding questions regarding the IRC protocol and being an overal good friend.

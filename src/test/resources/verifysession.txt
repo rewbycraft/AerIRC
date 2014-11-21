@@ -11,10 +11,6 @@ PONG :b\IMxptrGU
 :galaxy.roelf.org 001 Test :Welcome to the SpectreNet IRC Network Test!Test@2001:0:53aa:64c:38a4:2c1f:2add:c7a5
 :galaxy.roelf.org 002 Test :Your host is galaxy.roelf.org, running version InspIRCd-2.0
 :galaxy.roelf.org 003 Test :This server was created 15:17:06 Sep 20 2014
-:galaxy.roelf.org 004 Test galaxy.roelf.org InspIRCd-2.0 BHIRSWcghiorswx ABCDFHIJKLMNOPQRSTXYZbcdefghijklmnoprstuvwz FHIJLXYZbdefghjklovw
-:galaxy.roelf.org 005 Test AWAYLEN=200 CALLERID=g CASEMAPPING=rfc1459 CHANMODES=IXZbegw,k,FHJLdfjl,ABCDKMNOPQRSTcimnprstuz CHANNELLEN=32 CHANTYPES=# CHARSET=ascii ELIST=MU EXCEPTS=e EXTBAN=,ABCNOQRSTUcmprsz FNC INVEX=I KICKLEN=255 :are supported by this server
-:galaxy.roelf.org 005 Test MAP MAXBANS=60 MAXCHANNELS=20 MAXPARA=32 MAXTARGETS=20 MODES=10 NAMESX NETWORK=SpectreNet NICKLEN=25 OPERLOG OVERRIDE PREFIX=(Yohv)!@%+ REMOVE :are supported by this server
-:galaxy.roelf.org 005 Test SECURELIST SSL=[::]:6697 STARTTLS STATUSMSG=!@%+ TOPICLEN=255 USERIP VBANLIST WALLCHOPS WALLVOICES WATCH=32 :are supported by this server
 :galaxy.roelf.org 042 Test 1GAAAAABJ :your unique ID
 :galaxy.roelf.org 375 Test :galaxy.roelf.org message of the day
 :galaxy.roelf.org 372 Test :-     ░█▀▀░█▀█░█░░░█▀█░█░█░█░█░░░░█▀▄░█▀█░█▀▀░█░░░█▀▀░░░░█▀█░█▀▄░█▀▀
@@ -75,7 +71,5 @@ PONG :b\IMxptrGU
 :galaxy.roelf.org 252 Test 18 :operator(s) online
 :galaxy.roelf.org 254 Test 10 :channels formed
 :galaxy.roelf.org 255 Test :I have 3 clients and 1 servers
-:galaxy.roelf.org 265 Test :Current Local Users: 3  Max: 3
-:galaxy.roelf.org 266 Test :Current Global Users: 22  Max: 22
 :NickServ!NickServ@services.spectrenet.cf NOTICE Test :Welcome to SpectreNet, Test! Here on SpectreNet, we provide services to enable the registration of nicknames and channels! For details, type /msg NickServ help and /msg ChanServ help.
 :StatServ!StatServ@services.spectrenet.cf PRIVMSG Test :VERSION

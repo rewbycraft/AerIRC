@@ -1,13 +1,7 @@
 language: scala
 scala:
-   - 2.11.0
-   - 2.11.1
-   - 2.11.2
    - 2.11.3
-
 notifications:
   irc:
     - "irc.esper.net#rewbycraft"
-    - "irc.spectrenet.cf#rewbycraft"
-    - "irc.spectrenet.cf#Aeristalk"
   email: false
