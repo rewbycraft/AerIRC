@@ -3,6 +3,7 @@ package org.roelf.scala.aerirc.actors
 import akka.actor.Actor
 import org.roelf.scala.aerirc._
 import org.roelf.scala.aerirc.generator.IRCGenerator
+import org.roelf.scala.aerirc.messages._
 import org.roelf.scala.aerirc.parser.IRCParser
 
 import scala.collection.mutable

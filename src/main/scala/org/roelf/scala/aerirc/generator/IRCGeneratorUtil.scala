@@ -1,6 +1,6 @@
 package org.roelf.scala.aerirc.generator
 
-import org.roelf.scala.aerirc.IRCMessage
+import org.roelf.scala.aerirc.messages.IRCMessage
 
 import scala.reflect.runtime.universe
 import scala.reflect.runtime.universe._

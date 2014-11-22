@@ -19,7 +19,7 @@ class SocketActor(socket: Socket, target: ActorRef) extends Thread with Actor {
 		case SocketMessage(msg) =>
 			try
 			{
-				println("> " + msg)
+				//println("> " + msg)
 				out.println(msg)
 				logfile.println(msg)
 				logfile.flush()
@@ -51,7 +51,7 @@ class SocketActor(socket: Socket, target: ActorRef) extends Thread with Actor {
 		val line = in.readLine()
 		if (line != null)
 		{
-			println("< " + line)
+			//println("< " + line)
 			logfile.println(line)
 			logfile.flush()
 			target ! SocketMessage(line)

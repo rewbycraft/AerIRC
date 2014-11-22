@@ -4,6 +4,11 @@ import java.net.Socket
 
 import akka.actor.{ActorSystem, Props}
 import org.roelf.scala.aerirc.actors._
+import org.roelf.scala.aerirc.handlers.{IRCPreJoinHandler, IRCNoticeHandler, IRCUnknownMessageHandler}
+import org.roelf.scala.aerirc.messages.{JOIN, USER, NICK, IRCMessage}
+
+import scala.collection.mutable
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Created by roelf on 10/8/14.
@@ -21,6 +26,14 @@ class IRCNetwork(val host: String, val port: Int, val nick: String) {
 	private[aerirc] val networkActorRef = system.actorOf(Props(classOf[NetworkActor], this))
 
 	private[aerirc] val dispatchActorRef = system.actorOf(Props(classOf[DispatchActor], this))
+
+	private[aerirc] val joinedChannels = new ArrayBuffer[IRCChannel]
+
+	object handlers {
+		val unknownMessages = new Registry[IRCUnknownMessageHandler]
+		val notices = new Registry[IRCNoticeHandler]
+		val preJoins = new Registry[IRCPreJoinHandler]
+	}
 
 	final def sendRaw(msg: IRCMessage) = connectionActorRef ! msg
 

@@ -1,8 +1,8 @@
 package org.roelf.scala.aerirc.parser
 
 import org.reflections.Reflections
-import org.roelf.scala.aerirc.IRCAutoNumericMessage
 import org.roelf.scala.aerirc.exceptions.AerIRCWrappedException
+import org.roelf.scala.aerirc.messages.IRCAutoNumericMessage
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -40,7 +40,7 @@ object IRCParserUtil {
 		val definitions = scala.io.Source.fromURL(getClass.getResource("/parserdefs.txt")).getLines().toBuffer
 
 		//Dynamic parser definition generator
-		val reflections = new Reflections("org.roelf.scala.aerirc")
+		val reflections = new Reflections("org.roelf.scala.aerirc.messages")
 		val classes = reflections.getSubTypesOf(classOf[IRCAutoNumericMessage]).toArray
 		for (sub <- classes.map(a => a.asInstanceOf[Class[_ <: IRCAutoNumericMessage]]))
 		{

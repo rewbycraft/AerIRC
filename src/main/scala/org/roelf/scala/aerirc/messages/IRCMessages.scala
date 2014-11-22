@@ -1,4 +1,6 @@
-package org.roelf.scala.aerirc
+package org.roelf.scala.aerirc.messages
+
+import org.roelf.scala.aerirc.handlers.THandleAbleType
 
 /**
  *
@@ -7,12 +9,17 @@ package org.roelf.scala.aerirc
  *
  * Created by roelf on 10/7/14.
  */
-abstract class IRCMessage
+abstract class IRCMessage extends THandleAbleType
 
 /**
  * This is just an easier way to include the numeric id.
  */
 abstract class IRCNumericMessage(val numeric: Int) extends IRCMessage
+
+/*
+ * Non IRC related messages. Mostly abstractions.
+ */
+case class MESSAGE(from: String, message: String) extends IRCMessage
 
 /**
  * Automatic parser definition gen FTW!

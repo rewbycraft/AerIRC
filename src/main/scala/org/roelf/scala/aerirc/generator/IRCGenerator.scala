@@ -1,6 +1,7 @@
 package org.roelf.scala.aerirc.generator
 
 import org.roelf.scala.aerirc._
+import org.roelf.scala.aerirc.messages._
 import org.roelf.scala.aerirc.parser.IRCParserUtil
 
 /**
@@ -24,13 +25,14 @@ object IRCGenerator {
 		{
 			val fields = IRCGeneratorUtil.getFields(message).map(f => IRCGeneratorUtil.getFieldValue(message, f)).toArray
 			val rules = IRCParserUtil.definitions.filter(r => r.split("\t")(0).equals(message.getClass.getSimpleName))
+				.map(s => s.replace("%* ", "")).filter(r => "%.".r.findAllIn(r).size == fields.size-1)
 			if (rules.size > 0)
 			{
-				var rule = rules.map(s => s.replace("%* ", "")).reverse.head.split("\t")(1)
-				var rc = doSender(fields(0).asInstanceOf[String])
+				val rule = rules.head
+				var result = doSender(fields(0).asInstanceOf[String]) + rule.split("\t")(1)
 				for (field <- fields.slice(1, fields.size))
-					rule = "%.".r.replaceFirstIn(rule, if (field != null) field.toString else "")
-				return Some(rule)
+					result = "%.".r.replaceFirstIn(result, if (field != null) field.toString.replace("\\", "\\\\") else "")
+				return Some(result)
 			}
 		}
 

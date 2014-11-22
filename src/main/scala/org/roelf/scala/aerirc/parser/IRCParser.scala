@@ -1,6 +1,7 @@
 package org.roelf.scala.aerirc.parser
 
 import org.roelf.scala.aerirc._
+import org.roelf.scala.aerirc.messages._
 
 import scala.collection.mutable.ArrayBuffer
 import scala.language.implicitConversions
@@ -121,7 +122,8 @@ object IRCParser {
 		}
 
 		//Stage 2: Special case handling.
-		{ //Separate scope for cleanliness
+		{
+			//Separate scope for cleanliness
 			val to = line.indexOf(' ')
 			val args = splitter(line.substring(to + 1))
 
@@ -160,6 +162,17 @@ object IRCParser {
 					args(0).split(",").foreach(chan => rc += PART(sender, chan, message))
 					return Some(rc.toArray)
 
+				case "353" =>
+					val chan = args(2)
+					val nicks = args(3).split(" ")
+					val rc = new ArrayBuffer[IRCMessage]
+					for (nick <- nicks)
+						rc += RPL_NAMREPLY(sender, chan, nick.replace("@", "").replace("+", ""), nick.contains("@"), nick.contains("+"))
+					return Some(rc.toArray)
+
+					case "004" => return Some(Array())
+					case "005" => return Some(Array())
+
 				case _ =>
 			}
 		}
@@ -173,7 +186,7 @@ object IRCParser {
 				val matched = parseMatch(line, pattern)
 				if (matched.isDefined)
 				{
-					val cls = Class.forName("org.roelf.scala.aerirc." + className)
+					val cls = Class.forName("org.roelf.scala.aerirc.messages." + className)
 					val args = matched.get.toBuffer //I know we like to be immutable, but in this context we need to actually add stuff to it.
 					args.prepend(sender)
 					val types = IRCParserUtil.getConstructorArgTypes(cls)

@@ -56,6 +56,8 @@ WHO	WHO %s
 WHO	WHO %s o
 KILL	KILL %s %s
 #No I won't handle all ping cases. This should suffice.
+PING	PING :%s
+PONG	PONG :%s
 PING	PING %s
 PONG	PONG %s
 ERROR	ERROR %s

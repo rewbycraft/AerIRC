@@ -1,6 +1,6 @@
 package org.roelf.scala.aerirc.parser
 
-import org.roelf.scala.aerirc.UNKNOWN
+import org.roelf.scala.aerirc.messages.UNKNOWN
 import org.roelf.scala.aerirc.test.AbstractSpec
 
 /**
