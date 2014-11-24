@@ -4,6 +4,12 @@ name := "aerirc"
 
 version := "0.1-SNAPSHOT"
 
+organization := "org.roelf.scala"
+
+organizationName := "Roelf Software"
+
+organizationHomepage := Some(url("http://roelf.org"))
+
 scalaVersion := "2.11.4"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2" % "test"
