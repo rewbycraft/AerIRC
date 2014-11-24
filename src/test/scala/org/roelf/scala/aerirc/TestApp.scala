@@ -20,7 +20,7 @@ object TestApp extends App {
 		override def handle(message: IRCChannel): EWasHandled = {
 			message.handlers.messages.register(new IRCChannelMessageHandler {
 				override def handle(message: MESSAGE): EWasHandled = {
-					println("[" + message.from + "] " + message.message)
+					println("[" + message.sender + "] " + message.message)
 					EWasHandled.YES
 				}
 			})

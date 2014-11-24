@@ -51,6 +51,7 @@ object IRCParserUtil {
 			{
 				case "int" => args += (-1).asInstanceOf[AnyRef]
 				case "string" => args += null
+				case "ircuser" => args += null
 			}
 			val m = makeObject(sub, args.toArray).asInstanceOf[IRCAutoNumericMessage]
 

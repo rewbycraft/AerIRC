@@ -2,6 +2,7 @@ package org.roelf.scala.aerirc.test
 
 import org.roelf.scala.aerirc.generator.IRCGenerator
 import org.roelf.scala.aerirc.parser.IRCParser
+import org.roelf.scala.aerirc.user.TUserPool
 import org.scalatest.Ignore
 
 /**
@@ -13,6 +14,7 @@ import org.scalatest.Ignore
  */
 //@Ignore
 class ParserGeneratorCombinationSpec extends AbstractSpec {
+	object pool extends TUserPool
 
 	val session = scala.io.Source.fromURL(getClass.getResource("/verifysession.txt"))
 
@@ -26,7 +28,7 @@ class ParserGeneratorCombinationSpec extends AbstractSpec {
 	{
 		it should f"not return None the input for: verifysession.txt:$linec $message" in
 		{
-			val m = IRCParser.parse(message)
+			val m = IRCParser.parse(message, pool)
 			m should not be None
 			m.get.foreach(m1 =>
 			{

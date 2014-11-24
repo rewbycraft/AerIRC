@@ -29,7 +29,7 @@ class ConnectionActor(network: IRCNetwork) extends Actor {
 	{
 		//It came from the moon!
 		case SocketMessage(line) =>
-			val parsed = IRCParser.parse(line)
+			val parsed = IRCParser.parse(line, network)
 			if (!parsed.isDefined)
 				println(f"X Parser failure for: $line")
 			else

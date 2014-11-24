@@ -3,13 +3,14 @@ package org.roelf.scala.aerirc.generator
 import org.roelf.scala.aerirc._
 import org.roelf.scala.aerirc.messages._
 import org.roelf.scala.aerirc.parser.IRCParserUtil
+import org.roelf.scala.aerirc.user.IRCUser
 
 /**
  * Created by roelf on 10/8/14.
  */
 object IRCGenerator {
 
-	private def doSender(sender: String): String = if (sender != null) f":$sender " else ""
+	private def doSender(sender: IRCUser): String = if (sender != null) f":$sender " else ""
 
 	final def generate(message: IRCMessage): Option[String] =
 	{
@@ -29,7 +30,7 @@ object IRCGenerator {
 			if (rules.size > 0)
 			{
 				val rule = rules.head
-				var result = doSender(fields(0).asInstanceOf[String]) + rule.split("\t")(1)
+				var result = doSender(fields(0).asInstanceOf[IRCUser]) + rule.split("\t")(1)
 				for (field <- fields.slice(1, fields.size))
 					result = "%.".r.replaceFirstIn(result, if (field != null) field.toString.replace("\\", "\\\\") else "")
 				return Some(result)

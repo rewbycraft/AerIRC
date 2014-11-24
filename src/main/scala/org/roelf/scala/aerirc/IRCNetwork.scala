@@ -4,16 +4,16 @@ import java.net.Socket
 
 import akka.actor.{ActorSystem, Props}
 import org.roelf.scala.aerirc.actors._
-import org.roelf.scala.aerirc.handlers.{IRCPreJoinHandler, IRCNoticeHandler, IRCUnknownMessageHandler}
-import org.roelf.scala.aerirc.messages.{JOIN, USER, NICK, IRCMessage}
+import org.roelf.scala.aerirc.handlers.{IRCNoticeHandler, IRCPreJoinHandler, IRCUnknownMessageHandler}
+import org.roelf.scala.aerirc.messages.{IRCMessage, JOIN, NICK, USER}
+import org.roelf.scala.aerirc.user.TUserPool
 
-import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
  * Created by roelf on 10/8/14.
  */
-class IRCNetwork(val host: String, val port: Int, val nick: String) {
+class IRCNetwork(val host: String, val port: Int, val nick: String) extends TUserPool {
 
 	private[aerirc] val system = ActorSystem(host.replace('.', '-') + "--" + port)
 

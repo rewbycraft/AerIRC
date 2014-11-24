@@ -2,6 +2,7 @@ package org.roelf.scala.aerirc.parser
 
 import org.roelf.scala.aerirc._
 import org.roelf.scala.aerirc.messages._
+import org.roelf.scala.aerirc.user.{TUserPool, IRCUser}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.language.implicitConversions
@@ -103,7 +104,7 @@ object IRCParser {
 		Some(rc.toArray)
 	}
 
-	final def parse(_line: String): Option[Array[IRCMessage]] =
+	final def parse(_line: String, userPool: TUserPool): Option[Array[IRCMessage]] =
 	{
 		var line = _line
 		//Sanity checks
@@ -113,11 +114,11 @@ object IRCParser {
 			return None
 
 		//Stage 1: Extract sender
-		var sender: String = null
+		var sender: IRCUser = null
 		if (line.startsWith(":"))
 		{
 			val to = line.indexOf(' ')
-			sender = line.substring(1, to).trim
+			sender = userPool.userFromHostMask(line.substring(1, to).trim)
 			line = line.substring(to + 1)
 		}
 
