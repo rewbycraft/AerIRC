@@ -27,6 +27,6 @@ class Registry[T <: IRCHandler[_ <: THandleAbleType]] {
 	final private[aerirc] def handleAll(msg: Any) = getRegistered.takeWhile(h => {
 		assert(msg.isInstanceOf[THandleAbleType])
 		val rc = h.handle(msg)
-		!((rc == EWasHandled.YES) || (rc == EWasHandled.DONTHANDLE))
+		rc == EWasHandled.NO
 	})
 }
