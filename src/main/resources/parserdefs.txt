@@ -54,6 +54,8 @@ SERVLIST	SERVLIST %s
 SQUERY	SQUERY %s :%s
 WHO	WHO %s
 WHO	WHO %s o
+WHO	WHO %s %s
+WHO	WHO %s :%s
 KILL	KILL %s %s
 #No I won't handle all ping cases. This should suffice.
 PING	PING :%s

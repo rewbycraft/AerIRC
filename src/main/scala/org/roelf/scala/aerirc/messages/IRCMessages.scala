@@ -18,9 +18,12 @@ abstract class IRCMessage extends THandleAbleType
 abstract class IRCNumericMessage(val numeric: Int) extends IRCMessage
 
 /*
- * Non IRC related messages. Mostly abstractions.
+ * Not directly IRC related messages. Mostly abstractions.
  */
 case class MESSAGE(sender: IRCUser, message: String) extends IRCMessage
+case class REGISTERED(sender: IRCUser) extends IRCMessage
+case class JOINED(sender: IRCUser) extends IRCMessage
+case class PARTED(sender: IRCUser) extends IRCMessage
 
 /**
  * Automatic parser definition gen FTW!
@@ -47,7 +50,7 @@ case class JOIN(sender: IRCUser, channel: String, key: String) extends IRCMessag
 
 case class PART(sender: IRCUser, channel: String, message: String) extends IRCMessage
 
-case class MODE(sender: IRCUser, target: String, mode: Char, wasApplied: Boolean, params: String) extends IRCMessage
+case class MODE(sender: IRCUser, target: String, channel: String, mode: Char, wasApplied: Boolean) extends IRCMessage
 
 case class TOPIC(sender: IRCUser, channel: String, topic: String) extends IRCMessage
 
@@ -251,7 +254,7 @@ case class RPL_SUMMONING(sender: IRCUser, user: String, message: String) extends
 
 case class RPL_VERSION(sender: IRCUser, version: String, server: String, comment: String) extends IRCAutoNumericMessage(351)
 
-case class RPL_WHOREPLY(sender: IRCUser, channel: String, user: String, host: String, server: String, nickname: String, something: String, something2: String, hopcount: Int, realname: String) extends IRCAutoNumericMessage(352)
+case class RPL_WHOREPLY(sender: IRCUser, channel: String, user: String, host: String, server: String, nickname: String, something: String, hopcount: Int, realname: String) extends IRCAutoNumericMessage(352)
 
 case class RPL_ENDOFWHO(sender: IRCUser, name: String, message: String) extends IRCAutoNumericMessage(315)
 

@@ -1,4 +1,5 @@
 site_name: AerIRC
 pages:
 - [index.md, Home]
+- [tutorial.md, Tutorial]
 theme: readthedocs

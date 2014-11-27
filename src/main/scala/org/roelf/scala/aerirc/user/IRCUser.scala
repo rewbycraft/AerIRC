@@ -14,14 +14,17 @@ class IRCUser {
 	def mask = {
 		var rc = ""
 		if (nickname != null)
-			rc += nickname + "!"
+			rc += nickname
 		if (username != null)
-			rc += username + "@"
-		rc += host
+			rc += (if (nickname != null) "!" else "") + username
+		if (host != null)
+			rc += (if (username != null) "@" else "") + host
 		rc
 	}
 
+	def matchAble = (if (username != null) username else "") + (if (host != null) "@" else "") + (if (host != null) host else "")
+
 	override def toString: String = mask
-	override def hashCode(): Int = (username + "@" + host).hashCode
+	override def hashCode(): Int = matchAble.hashCode
 	override def equals(obj: scala.Any): Boolean = hashCode().equals(obj.hashCode())
 }

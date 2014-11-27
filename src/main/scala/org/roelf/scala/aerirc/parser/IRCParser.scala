@@ -1,8 +1,7 @@
 package org.roelf.scala.aerirc.parser
 
-import org.roelf.scala.aerirc._
 import org.roelf.scala.aerirc.messages._
-import org.roelf.scala.aerirc.user.{TUserPool, IRCUser}
+import org.roelf.scala.aerirc.user.{IRCUser, TUserPool}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.language.implicitConversions
@@ -133,11 +132,14 @@ object IRCParser {
 				case "MODE" =>
 					var curMode: Boolean = true
 					val rc = new ArrayBuffer[IRCMessage]
+					var namid = 0
 					args(1).foreach
 					{
 						case '+' => curMode = true
 						case '-' => curMode = false
-						case c => rc += MODE(sender, args(0), c, curMode, if (args.size > 1) args(1) else null)
+						case c =>
+							rc += MODE(sender, args(0), if (args.size > namid+1) args(2+namid) else null, c, curMode)
+							namid += 1
 					}
 					if (rc.size > 0)
 						return Some(rc.toArray)
@@ -163,6 +165,18 @@ object IRCParser {
 					args(0).split(",").foreach(chan => rc += PART(sender, chan, message))
 					return Some(rc.toArray)
 
+				case "352" =>
+					val chan = args(1)
+					val user = args(2)
+					val host = args(3)
+					val server = args(4)
+					val nick = args(5)
+					val something = args(6)
+					val hopcount = args(7).split(" ")(0)
+					val realName = args(7).split(" ").slice(1, args(7).split(" ").size).mkString(" ")
+					return Some(Array(RPL_WHOREPLY(sender, chan, user, host, server, nick, something, hopcount.toInt, realName)))
+
+
 				case "353" =>
 					val chan = args(2)
 					val nicks = args(3).split(" ")
@@ -171,8 +185,10 @@ object IRCParser {
 						rc += RPL_NAMREPLY(sender, chan, nick.replace("@", "").replace("+", ""), nick.contains("@"), nick.contains("+"))
 					return Some(rc.toArray)
 
-					case "004" => return Some(Array())
-					case "005" => return Some(Array())
+				case "004" => return Some(Array())
+				case "005" => return Some(Array())
+				case "265" => return Some(Array())
+				case "266" => return Some(Array())
 
 				case _ =>
 			}

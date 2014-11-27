@@ -14,3 +14,4 @@ trait IRCHandler[T <: THandleAbleType] {
 }
 
 trait IRCPreJoinHandler extends IRCHandler[IRCChannel]
+trait IRCPostPartHandler extends IRCHandler[IRCChannel]
