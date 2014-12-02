@@ -1,7 +1,8 @@
 package org.roelf.scala.aerirc.actors
 
-import akka.actor.Actor
+import akka.actor.{PoisonPill, Actor}
 import org.roelf.scala.aerirc._
+import org.roelf.scala.aerirc.handlers.NICKCHANGE
 import org.roelf.scala.aerirc.messages._
 
 import scala.collection.mutable
@@ -46,7 +47,6 @@ class DispatchActor(network: IRCNetwork) extends Actor {
 			network.joinedChannels.find(c => c.channelName.equalsIgnoreCase(channel)).foreach(c => c.actor ! msg)
 
 		case msg@RPL_NAMREPLY(sender, channel, nickname, op, voice) =>
-			println(msg)
 			val user = network.userFromUser(nickname)
 			if (user == null)
 			{
@@ -56,9 +56,9 @@ class DispatchActor(network: IRCNetwork) extends Actor {
 			else
 			{
 				if (op)
-					network.joinedChannels.find(c => c.channelName == channel).foreach(c => c._opList = c._opList + user.matchAble)
+					network.joinedChannels.find(c => c.channelName == channel).foreach(c => c._opList = c._opList + user.matchable)
 				if (voice)
-					network.joinedChannels.find(c => c.channelName == channel).foreach(c => c._voiceList = c._voiceList + user.matchAble)
+					network.joinedChannels.find(c => c.channelName == channel).foreach(c => c._voiceList = c._voiceList + user.matchable)
 			}
 
 		case RPL_WHOREPLY(s, c, username, host, server, nick, something, hops, rName) =>
@@ -68,17 +68,29 @@ class DispatchActor(network: IRCNetwork) extends Actor {
 			for (w <- todo)
 			{
 				if (w.op)
-					network.joinedChannels.find(c => c.channelName == w.channel).foreach(c => c._opList = c._opList + user.matchAble)
+					network.joinedChannels.find(c => c.channelName == w.channel).foreach(c => c._opList = c._opList + user.matchable)
 				if (w.voice)
-					network.joinedChannels.find(c => c.channelName == w.channel).foreach(c => c._voiceList = c._voiceList + user.matchAble)
+					network.joinedChannels.find(c => c.channelName == w.channel).foreach(c => c._voiceList = c._voiceList + user.matchable)
 				self ! JOIN(user, w.channel, null)
 			}
+
+		case NICK(sender, nick, hops) =>
+			val oldnick = sender.nickname
+			network.setUserNick(sender, nick)
+			if (network.isMe(sender))
+				network._nick = nick
+			network.handlers.nickChanged.handleAll(NICKCHANGE(network.userFromUser(nick), oldnick))
+
+
+		case msg@MODE(sender, target, channel, mode, wasApplied) =>
+			network.joinedChannels.find(c => c.channelName.equalsIgnoreCase(channel)).foreach(c => c.actor ! msg)
+
 
 		case ERROR(sender, reason) =>
 			network.teardown()
 
 		//Internal stuff 'n things
-		case ExitMessage => context stop self
+		case ExitMessage => self ! PoisonPill
 		case msg: IRCMessage => network.handlers.unknownMessages.handleAll(msg)
 
 	}

@@ -1,6 +1,6 @@
 package org.roelf.scala.aerirc.actors
 
-import akka.actor.Actor
+import akka.actor.{PoisonPill, Actor}
 import org.roelf.scala.aerirc._
 import org.roelf.scala.aerirc.generator.IRCGenerator
 import org.roelf.scala.aerirc.messages._
@@ -62,7 +62,7 @@ class ConnectionActor(network: IRCNetwork) extends Actor {
 
 
 		//Internal stuff 'n things
-		case ExitMessage => context stop self
+		case ExitMessage => self ! PoisonPill
 	}
 
 }

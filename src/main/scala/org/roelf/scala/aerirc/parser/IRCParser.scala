@@ -138,7 +138,7 @@ object IRCParser {
 						case '+' => curMode = true
 						case '-' => curMode = false
 						case c =>
-							rc += MODE(sender, args(0), if (args.size > namid+1) args(2+namid) else null, c, curMode)
+							rc += MODE(sender, if (args.size > namid+1) args(2+namid) else null, args(0), c, curMode)
 							namid += 1
 					}
 					if (rc.size > 0)
@@ -219,6 +219,7 @@ object IRCParser {
 				}
 			}
 		}
-		None
+
+		Some(Array(UNKNOWN(sender, line.substring(0, line.indexOf(' ')).trim.toUpperCase, splitter(line.substring(line.indexOf(' ') + 1)))))
 	}
 }

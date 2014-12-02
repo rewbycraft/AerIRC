@@ -1,22 +1,22 @@
 package org.roelf.scala.aerirc.user
 
 import org.roelf.scala.aerirc.IRCNetwork
-import org.roelf.scala.aerirc.messages.WHO
 
 import scala.collection.mutable
-import scala.concurrent.Future
 
 /**
  * Created by roelf on 11/22/14.
  */
-trait TUserPool {
-	private[user] val userPool = new mutable.HashSet[IRCUser]
+private[aerirc] trait TUserPool {
+	private[aerirc] val userPool = new mutable.HashSet[IRCUser]
 	private var network: IRCNetwork = null
 
 	private[aerirc] def setNetwork(n: IRCNetwork) = network = n
 
 	private def parseMask(mask: String): (String, String, String) =
 	{
+		if (!mask.contains("@"))
+			return (null, null, mask)
 		var nick: String = null
 		val p2 = mask.split("!")(mask.split("!").size - 1)
 		if (mask.split("!").size > 1)
@@ -26,7 +26,8 @@ trait TUserPool {
 		(nick, user, host)
 	}
 
-	private def createNewUserFromMask(mask: String): IRCUser = {
+	private def createNewUserFromMask(mask: String): IRCUser =
+	{
 		if (mask.contains("@"))
 		{
 			val m = parseMask(mask)
@@ -44,25 +45,28 @@ trait TUserPool {
 		}
 	}
 
-	private[aerirc] def removeUserFromPool(u: IRCUser) = userPool -= u
-
-	def isMe(u: IRCUser): Boolean = u.nickname == network.nick
-
-	def userFromUser(nick: String): IRCUser = {
-		val filtered = userPool.filter(u => nick == u.nickname)
-		if (filtered.size == 0)
-			null
-		else
-			filtered.head
+	private[aerirc] def removeUserFromPool(u: IRCUser) = userPool.synchronized
+	{
+		userPool -= u
 	}
 
-	def userFromHostMask(mask: String): IRCUser = {
-		val filtered = userPool.filter(u => mask.split("!")(mask.split("!").size-1) == u.matchAble)
+	def isMe(u: IRCUser): Boolean = u.nickname.equalsIgnoreCase(network.nick)
+
+	def me: IRCUser = userFromUser(network.nick)
+
+	def userFromUser(nick: String): IRCUser = userPool.synchronized
+	{
+		userPool.find(u => nick == u.nickname).orNull
+	}
+
+	def userFromHostMask(mask: String): IRCUser = userPool.synchronized
+	{
+		val filtered = userPool.filter(u => mask.split("!")(mask.split("!").size - 1) == u.matchable)
 		if (filtered.size == 0)
 		{
 			val user = createNewUserFromMask(mask)
 			userPool += user
-			user
+			return user
 		}
 		else
 		{
@@ -76,7 +80,20 @@ trait TUserPool {
 				user._host = m._3
 			userPool -= filtered.head
 			userPool += user
-			user
+			return user
 		}
+	}
+
+	def userFromMatchable(matchable: String): IRCUser = userPool.synchronized {
+		userPool.find(u => u.matchable.equalsIgnoreCase(matchable)).orNull
+	}
+
+	private[aerirc] def setUserNick(u: IRCUser, nick: String): Unit = userPool.synchronized
+	{
+		val oldUser = userPool.find(user => user.matchable == u.matchable).orNull
+		val newUser = oldUser
+		newUser._nickname = nick
+		userPool -= oldUser
+		userPool += newUser
 	}
 }

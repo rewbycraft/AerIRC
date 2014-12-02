@@ -8,7 +8,7 @@ import org.roelf.scala.aerirc.messages._
  */
 object TestApp extends App {
 	val network = new IRCNetwork
-	network.host = "galaxy.spectrenet.cf"
+	network.host = "irc.spectrenet.cf"
 	network.nick = "Test"
 
 	network.handlers.unknownMessages.register(new IRCUnknownMessageHandler {
@@ -26,12 +26,23 @@ object TestApp extends App {
 		}
 	})
 
+	network.handlers.nickChanged.register(new IRCNickHandler {
+		override def handle(message: NICKCHANGE): EWasHandled = {
+			println(f"Nick change: ${message.oldNick}->${message.user.nickname}")
+			EWasHandled.YES
+		}
+	})
+
 	network.handlers.preJoins.register(new IRCPreJoinHandler {
 		override def handle(channel: IRCChannel): EWasHandled = {
 			channel.handlers.messages.register(new IRCChannelMessageHandler {
 				override def handle(message: MESSAGE): EWasHandled = {
 					println("[" + message.sender.nickname + "] " + message.message)
-					network.quit("Gah!")
+					println("Users: " + network.userPool.size)
+					if (message.message.equalsIgnoreCase("quit"))
+						network.quit("Gah!")
+					if (message.message.startsWith("nick"))
+						network.nick = message.message.split(" ")(1)
 					EWasHandled.YES
 				}
 			})
@@ -58,6 +69,28 @@ object TestApp extends App {
 				override def handle(message: PART): EWasHandled =
 				{
 					println(message.sender.nickname + " left")
+					EWasHandled.YES
+				}
+			})
+			channel.handlers.modeChanged.register(new IRCModeHandler {
+				override def handle(message: MODECHANGE): EWasHandled = {
+					println(message)
+					if (!channel.network.isMe(message.user))
+					{
+						channel.say("Hey " + message.user.nickname + "! Mode changed!")
+						if (channel.opList.contains(message.user))
+							channel.say("OMG, " + message.user.nickname + "! You're an OP!")
+						if (channel.voiceList.contains(message.user))
+							channel.say("Yay! " + message.user.nickname + " has voice!")
+					}
+					else
+					{
+						channel.say("Hey! My mode changed!")
+						if (channel.opList.contains(message.user))
+							channel.say("OMG! I'm an OP!")
+						if (channel.voiceList.contains(message.user))
+							channel.say("Yay! I have voice!")
+					}
 					EWasHandled.YES
 				}
 			})

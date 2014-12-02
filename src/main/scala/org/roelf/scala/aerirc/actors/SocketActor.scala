@@ -3,7 +3,7 @@ package org.roelf.scala.aerirc.actors
 import java.io._
 import java.net.Socket
 
-import akka.actor.{Actor, ActorRef}
+import akka.actor.{PoisonPill, Actor, ActorRef}
 
 /**
  * Created by roelf on 10/8/14.
@@ -32,17 +32,18 @@ class SocketActor(socket: Socket, target: ActorRef) extends Thread with Actor {
 		case ExitMessage =>
 			if (keepGoing)
 			{
-				println("Stopped.")
 				keepGoing = false
 				try
 				{
 					logfile.close()
+					out.close()
+					in.close()
 					socket.close()
 				} catch {
 					case e: IOException =>
 						e.printStackTrace()
 				}
-				context stop self
+				self ! PoisonPill
 			}
 	}
 
@@ -56,7 +57,7 @@ class SocketActor(socket: Socket, target: ActorRef) extends Thread with Actor {
 			logfile.flush()
 			target ! SocketMessage(line)
 		}
-		else
+		else if (!keepGoing)
 			self ! ExitMessage
 	}
 

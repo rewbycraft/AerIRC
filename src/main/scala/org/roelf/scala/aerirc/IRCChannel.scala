@@ -30,12 +30,14 @@ class IRCChannel(val network: IRCNetwork, val channelName: String) extends THand
 	def userList = _userlist.map(u => network.userFromHostMask(u))
 
 	object handlers {
+		val unknownMessages = new Registry[IRCUnknownMessageHandler]
 		val messages = new Registry[IRCChannelMessageHandler]
 		val notices = new Registry[IRCNoticeMessageHandler]
 		val weJoined = new Registry[IRCJoinedChannelMessageHandler]
 		val joined = new Registry[IRCJoinMessageHandler]
 		val weParted = new Registry[IRCPartedChannelMessageHandler]
 		val parted = new Registry[IRCPartMessageHandler]
+		val modeChanged = new Registry[IRCModeHandler]
 	}
 
 	final def say(text: String) = network.sendPrivateMessage(channelName, text)

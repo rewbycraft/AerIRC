@@ -34,7 +34,8 @@ object IRCGenerator {
 				val rule = rules.head
 				var result = doSender(fields(0).asInstanceOf[IRCUser]) + rule.split("\t")(1)
 				for (field <- fields.slice(1, fields.size))
-					result = "%.".r.replaceFirstIn(result, if (field != null) field.toString.replace("\\", "\\\\") else "")
+					if (!(field.isInstanceOf[Int] && (field.asInstanceOf[Int] == -1)))
+						result = "%.".r.replaceFirstIn(result, if (field != null) field.toString.replace("\\", "\\\\") else "")
 				return Some(result)
 			}
 		}

@@ -21,8 +21,8 @@ Let's start with the basics.
 
 ````
 val network = new IRCNetwork
-network.setHost("irc.spectrenet.cf")
-network.setNick("AerIRC|Tutorial")
+network.host = "irc.spectrenet.cf"
+network.nick = "AerIRC|Tutorial"
 
 network.connect()
 ````
@@ -37,8 +37,8 @@ However, our example doesn't do anything yet. Let's fix that!
 
 ````
 val network = new IRCNetwork
-network.setHost("irc.spectrenet.cf")
-network.setNick("AerIRC|Tutorial")
+network.host = "irc.spectrenet.cf"
+network.nick = "AerIRC|Tutorial"
 
 network.handlers.registered.register(new IRCRegisteredHandler {
 	def handle(message: REGISTERED): EWasHandled = {
@@ -62,3 +62,10 @@ You can define them inline like in the example or you can simply create a class 
 
 TIP: If you go with the latter approach; the handler types are all traits, you can implement multiple ones in the same class as long as their message-types don't clash.
 
+##Going forward from this tutorial
+I have now shown you the basic principle of AerIRC.
+
+Where to go from here?
+
+* Look up the scaladoc for IRCChannel.handlers and IRCNetwork.handlers to see what all you can hook into in the way demonstrated above.
+* Take a look at the handler IRCNetwork.handlers.preJoins. This handler allows you to get the channel object before any other event is fired at it, allowing you to hook into channel events. Very handy.
