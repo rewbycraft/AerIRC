@@ -27,7 +27,8 @@ This code is under MIT license. See LICENSE.
 
 ## Downloads/maven
 
-I hope to get a maven repo up for this soon-ish. No promises.
+See the snapshot repository at:
+https://nexus.roelf.org/nexus/
 
 ## Unsupported stuff:
 
