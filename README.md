@@ -21,6 +21,12 @@ If you're interested in using this library and/or contributing, great!
 Shoot me a PM and I'll do my best to help you set up the library and fix bugs/implement missing functionality.
 There's a file called TestApp.scala in src/test/scala which shows basic usage.
 
+##Documentation
+There are some docs at:
+http://doc.roelf.org/AerIRC
+http://scaladoc.roelf.org/AerIRC
+
+
 ## Licensing
 
 This code is under MIT license. See LICENSE.

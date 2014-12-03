@@ -12,7 +12,7 @@ class SocketActor(socket: Socket, target: ActorRef) extends Thread with Actor {
 	private val out = new PrintStream(socket.getOutputStream, true)
 	private val in = new BufferedReader(new InputStreamReader(socket.getInputStream))
 	private var keepGoing = true
-	private val logfile = new PrintWriter("/tmp/aerirclog.txt", "UTF-8")
+	//private val logfile = new PrintWriter("/tmp/aerirclog.txt", "UTF-8")
 
 	override def receive: Receive =
 	{
@@ -21,8 +21,8 @@ class SocketActor(socket: Socket, target: ActorRef) extends Thread with Actor {
 			{
 				//println("> " + msg)
 				out.println(msg)
-				logfile.println(msg)
-				logfile.flush()
+				//logfile.println(msg)
+				//logfile.flush()
 			} catch {
 				case e: IOException =>
 					e.printStackTrace()
@@ -35,7 +35,7 @@ class SocketActor(socket: Socket, target: ActorRef) extends Thread with Actor {
 				keepGoing = false
 				try
 				{
-					logfile.close()
+					//logfile.close()
 					out.close()
 					in.close()
 					socket.close()
@@ -53,8 +53,8 @@ class SocketActor(socket: Socket, target: ActorRef) extends Thread with Actor {
 		if (line != null)
 		{
 			//println("< " + line)
-			logfile.println(line)
-			logfile.flush()
+			//logfile.println(line)
+			//logfile.flush()
 			target ! SocketMessage(line)
 		}
 		else if (!keepGoing)
